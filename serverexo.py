@@ -36,7 +36,7 @@ class index:
             for genre in genres:
                 result +='<td>'+genre.Name+'</td>'
                 break
-            result +='<td>'+a.Title+'</td>'           
+            result +='<td>'+album.Title+'</td>'           
             result += '</tr>'
         result += '</table>'
         result += '<br>'
