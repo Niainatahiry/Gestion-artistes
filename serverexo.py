@@ -19,9 +19,11 @@ class index:
         a2=db.select('Album',limit=10)
         artists=db.select('Artist', limit=10)
         genres=db.select('Genre',limit=10)
-        result='<html><head><title>test</title></head><body> '
-        result += '<table border="1">'
-        result += '<tr><th>Id_artists</th><th>Artiste</th><th>Genre</th><th>Album</th></tr> '
+        result='<html><head><title>test</title>'
+        result += '<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.css"> '
+        result += '</head><body> '
+        result += '<table border="1" class="table">'
+        result += '<tr class="table-success"><th>Id_artists</th><th>Artiste</th><th>Genre</th><th>Album</th></tr> '
         for a in a2:
             result += '<tr>'
             for artist in artists:
