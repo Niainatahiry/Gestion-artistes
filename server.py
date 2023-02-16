@@ -1,8 +1,11 @@
 import web
+import nav
+import footer
+
 from DB import Db
 from list_artist import artist
 from list_album import album
-from list_tracks import track
+from list_track import track
 web.config.debug = True
 
 urls = (
@@ -14,8 +17,8 @@ urls = (
 
 class index:
     def GET(self):
-        #d=Db()
-        db=Db().getDb()
+        d=Db()
+        db=d.getDb()
         albums=db.select('Album',limit=10)
         artists=db.select('Artist', limit=10)
         playlists=db.select('Playlist',limit=10)
@@ -26,17 +29,7 @@ class index:
         result += '</head><body> '
 
         ##voici les liens
-        result +='<nav class="navbar navbar-expand-sm bg-dark navbar-dark">'
-        result +='<ul class="nav navbar-nav">'
-        result +='<li class="nav-item active"><a class="nav-link" href="/">Home</a></li>'
-        result +='<li class="nav-item"><a class="nav-link" href="/artist">Artists</a></li>'
-        result +='<li class="nav-item"><a class="nav-link" href="/album">Albums</a></li>'
-        result +='<li class="nav-item"><a class="nav-link" href="/track">Tracks</a></li>'
-        result +='</ul>'
-        result +='</nav>'
-        result += '<br>'
-        ##
-        
+        result += nav.nav()
         result += '<h1 class="row justify-content-center align-items-center"><dl>Tableau des "artistes"</dl></h1>'
         result += '<p class="row justify-content-center align-items-center">Voici le tableau classant les "artistes", leurs Id ,leur genre de music, et un album de chaque artistes</p>'
         result += '<table border="1" class="table">'
@@ -70,6 +63,7 @@ class index:
             result +='<td>'+str(track.Composer)+'</td>'
             result +='<td>'+str(track.UnitPrice)+'</td>'
         result += '</table>'
+        result += footer.footer()
         result += '</body></html> '
         return result
 if __name__ == "__main__":

@@ -1,4 +1,5 @@
 import web
+import footer
 from DB import Db
 
 web.config.debug = True
@@ -23,8 +24,8 @@ class artist:
         ##voici les liens
         result +='<nav class="navbar navbar-expand-sm bg-dark navbar-dark">'
         result +='<ul class="nav navbar-nav">'
-        result +='<li class="nav-item active"><a class="nav-link" href="/">Home</a></li>'
-        result +='<li class="nav-item"><a class="nav-link" href="/artist">Artists</a></li>'
+        result +='<li class="nav-item "><a class="nav-link" href="/">Home</a></li>'
+        result +='<li class="nav-item active"><a class="nav-link" href="/artist">Artists</a></li>'
         result +='<li class="nav-item"><a class="nav-link" href="/album">Albums</a></li>'
         result +='<li class="nav-item"><a class="nav-link" href="/track">Tracks</a></li>'
         result +='</ul>'
@@ -43,6 +44,7 @@ class artist:
             result +='<td>'+artist.Name+'</td>'
             result += '</tr>'
         result += '</table>'
+        result += footer.footer()
         result += '</body></html>'
         return result
 if __name__ == "__main__":

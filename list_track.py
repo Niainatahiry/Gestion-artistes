@@ -1,4 +1,5 @@
 import web
+import footer
 from DB import Db
 
 web.config.debug = True
@@ -14,16 +15,8 @@ urls = (
 ###ajout classe track url/track 
 class track:
     def GET(self):
-        db = web.database(
-            dbn='mysql',
-            host='tmp-insi.rktmb.org',
-            port=3306,
-            user='insigroup00',
-            pw='insigroup00',
-            db='project00',
-        )
-
-
+        d=Db()
+        db=d.getDb()
         tracks=db.select('Track', limit=10)
         result='<html><head><title>test</title>'
         result += '<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.css"> '
@@ -35,7 +28,7 @@ class track:
         result +='<li class="nav-item "><a class="nav-link" href="/">Home</a></li>'
         result +='<li class="nav-item"><a class="nav-link" href="/artist">Artists</a></li>'
         result +='<li class="nav-item"><a class="nav-link" href="/album">Albums</a></li>'
-        result +='<li class="nav-item active"><a class="nav-link" href="/track">Tracks</a></li>'
+        result +='<li class="nav-item active active"><a class="nav-link" href="/track">Tracks</a></li>'
         result +='</ul>'
         result +='</nav>'
         result += '<br>'
@@ -52,6 +45,7 @@ class track:
             result +='<td>'+track.Name+'</td>'
             result += '</tr>'
         result += '</table>'
+        result += footer.footer()
         result += '</body></html>'
         return result
 if __name__ == "__main__":
