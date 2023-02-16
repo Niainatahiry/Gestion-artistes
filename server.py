@@ -21,6 +21,7 @@ class index:
         )
         albums=db.select('Album',limit=10)
         artists=db.select('Artist', limit=10)
+        playlists=db.select('Playlist',limit=10)
         genres=db.select('Genre',limit=10)
         tracks=db.select('Track',limit=10)
         result='<html><head><title>test</title>'
@@ -39,15 +40,18 @@ class index:
         result += '<br>'
         ##
         
-        result += '<h1 class="texte-center"><dl>Tableau des "artistes"</dl></h1>'
-        result += '<p>Voici le tableau classant les "artistes", leurs Id ,leur genre de music, et un album de chaque artistes</p>'
+        result += '<h1 class="row justify-content-center align-items-center"><dl>Tableau des "artistes"</dl></h1>'
+        result += '<p class="row justify-content-center align-items-center">Voici le tableau classant les "artistes", leurs Id ,leur genre de music, et un album de chaque artistes</p>'
         result += '<table border="1" class="table">'
-        result += '<tr class="table-success"><th>Id_artists</th><th>Artiste</th><th>Genre</th><th>Album</th></tr> '
+        result += '<tr class="table-success"><th>Id_artists</th><th>Artiste</th><th>Album</th><th>Genre</th><th>Playlist</th></tr> '
         for album in albums:
             result += '<tr>'
             for artist in artists:
                 result +='<td>'+str(artist.ArtistId)+'</td>'
                 result +='<td>'+artist.Name+'</td>'
+                break
+            for playlist in playlists:
+                result +='<td>'+playlist.Name+'</td>'
                 break
             for genre in genres:
                 result +='<td>'+genre.Name+'</td>'
@@ -93,8 +97,8 @@ class artist:
         ##voici les liens
         result +='<nav class="navbar navbar-expand-sm bg-dark navbar-dark">'
         result +='<ul class="nav navbar-nav">'
-        result +='<li class="nav-item active"><a class="nav-link" href="/">Home</a></li>'
-        result +='<li class="nav-item"><a class="nav-link" href="/artist">Artists</a></li>'
+        result +='<li class="nav-item "><a class="nav-link" href="/">Home</a></li>'
+        result +='<li class="nav-item active"><a class="nav-link" href="/artist">Artists</a></li>'
         result +='<li class="nav-item"><a class="nav-link" href="/album">Albums</a></li>'
         result +='<li class="nav-item"><a class="nav-link" href="/track">Tracks</a></li>'
         result +='</ul>'
@@ -103,7 +107,7 @@ class artist:
         ##
         
         result += '<br>'
-        result += '<h1><dl>listes des artistes</dl></h1>'
+        result += '<h1 class="row justify-content-center align-items-center"><dl>Listes des artistes</dl></h1>'
         result += '<table border="1" class="table">'
         result += '<tr>'
         result += '<tr class="table-success"><th>Id_artists</th><th>Artiste</th></tr>'
@@ -136,9 +140,9 @@ class album:
         ##tous les liens
         result +='<nav class="navbar navbar-expand-sm bg-dark navbar-dark">'
         result +='<ul class="nav navbar-nav">'
-        result +='<li class="nav-item active"><a class="nav-link" href="/">Home</a></li>'
+        result +='<li class="nav-item "><a class="nav-link" href="/">Home</a></li>'
         result +='<li class="nav-item"><a class="nav-link" href="/artist">Artists</a></li>'
-        result +='<li class="nav-item"><a class="nav-link" href="/album">Albums</a></li>'
+        result +='<li class="nav-item active"><a class="nav-link" href="/album">Albums</a></li>'
         result +='<li class="nav-item"><a class="nav-link" href="/track">Tracks</a></li>'
         result +='</ul>'
         result +='</nav>'
@@ -146,7 +150,7 @@ class album:
         ##
         
         result += '<br>'
-        result += '<h1><dl>listes des albums</dl></h1>'
+        result += '<h1 class="row justify-content-center align-items-center"><dl>Listes des albums</dl></h1>'
         result += '<table border="1" class="table">'
         result += '<tr>'
         result += '<tr class="table-success"><th>Id_albums</th><th>Album</th></tr>'
@@ -179,17 +183,17 @@ class track:
         ##tous les liens
         result +='<nav class="navbar navbar-expand-sm bg-dark navbar-dark">'
         result +='<ul class="nav navbar-nav">'
-        result +='<li class="nav-item active"><a class="nav-link" href="/">Home</a></li>'
+        result +='<li class="nav-item "><a class="nav-link" href="/">Home</a></li>'
         result +='<li class="nav-item"><a class="nav-link" href="/artist">Artists</a></li>'
         result +='<li class="nav-item"><a class="nav-link" href="/album">Albums</a></li>'
-        result +='<li class="nav-item"><a class="nav-link" href="/track">Tracks</a></li>'
+        result +='<li class="nav-item active"><a class="nav-link" href="/track">Tracks</a></li>'
         result +='</ul>'
         result +='</nav>'
         result += '<br>'
         ##
         
         result += '<br>'
-        result += '<h1><dl>listes des traks</dl></h1>'
+        result += '<h1 class="row justify-content-center align-items-center"><dl>Listes des traks</dl></h1>'
         result += '<table border="1" class="table">'
         result += '<tr>'
         result += '<tr class="table-success"><th>id-track</th><th>tracks</th>'
