@@ -1,7 +1,8 @@
 import web
 from DB import Db
 from list_artist import artist
-
+from list_album import album
+from list_tracks import track
 web.config.debug = True
 
 urls = (
@@ -17,6 +18,7 @@ class index:
         db=Db().getDb()
         albums=db.select('Album',limit=10)
         artists=db.select('Artist', limit=10)
+        playlists=db.select('Playlist',limit=10)
         genres=db.select('Genre',limit=10)
         tracks=db.select('Track',limit=10)
         result='<html><head><title>test</title>'
@@ -35,15 +37,18 @@ class index:
         result += '<br>'
         ##
         
-        result += '<h1 class="texte-center"><dl>Tableau des "artistes"</dl></h1>'
-        result += '<p>Voici le tableau classant les "artistes", leurs Id ,leur genre de music, et un album de chaque artistes</p>'
+        result += '<h1 class="row justify-content-center align-items-center"><dl>Tableau des "artistes"</dl></h1>'
+        result += '<p class="row justify-content-center align-items-center">Voici le tableau classant les "artistes", leurs Id ,leur genre de music, et un album de chaque artistes</p>'
         result += '<table border="1" class="table">'
-        result += '<tr class="table-success"><th>Id_artists</th><th>Artiste</th><th>Genre</th><th>Album</th></tr> '
+        result += '<tr class="table-success"><th>Id_artists</th><th>Artiste</th><th>Album</th><th>Genre</th><th>Playlist</th></tr> '
         for album in albums:
             result += '<tr>'
             for artist in artists:
                 result +='<td>'+str(artist.ArtistId)+'</td>'
                 result +='<td>'+artist.Name+'</td>'
+                break
+            for playlist in playlists:
+                result +='<td>'+playlist.Name+'</td>'
                 break
             for genre in genres:
                 result +='<td>'+genre.Name+'</td>'
